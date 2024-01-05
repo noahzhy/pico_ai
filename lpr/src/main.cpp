@@ -5,6 +5,14 @@
 #include "tflite_model.h"
 #include "ml_model.h"
 
+
+MLModel ml_model(tflite_model, 128 * 1024);
+
+int8_t* scaled_spectrum = nullptr;
+int32_t spectogram_divider;
+float spectrogram_zero_point;
+
+
 // dict -> {0: ' ', 1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', ...}
 void decode(int* input, char* output, int len) {
     char dict[69] = {
@@ -63,6 +71,23 @@ void ctc_decode(float* input, int* output, int T, int C, int* size) {
 
 
 int main() {
+    // initialize stdio
+    stdio_init_all();
+
+    if (!ml_model.init()) {
+        printf("Failed to initialize ML model!\n");
+        while (1) { tight_loop_contents(); }
+    }
+
+    scaled_spectrum = (int8_t*)ml_model.input_data();
+    spectogram_divider = 64 * ml_model.input_scale(); 
+    spectrogram_zero_point = ml_model.input_zero_point();
+
+    float prediction = ml_model.predict();
+    printf("Prediction: %f\n", prediction);
+
+
+
 
     int T = 16;
     int C = 69;
