@@ -1,7 +1,9 @@
-// #include "pico/stdlib.h"
 #include <stdio.h>
 #include <math.h>
 
+#include "pico/stdlib.h"
+#include "tflite_model.h"
+#include "ml_model.h"
 
 // dict -> {0: ' ', 1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', ...}
 void decode(int* input, char* output, int len) {

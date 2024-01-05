@@ -15,6 +15,14 @@ brew install gcc-arm-embedded
 brew install cmake
 ```
 
+## Convert TF Lite model to C array
+
+```bash
+echo "alignas(8) const unsigned char model[] = {" > tflite_model.h
+cat tflite_model.tflite | xxd -i >> tflite_model.h
+echo "};" >> tflite_model.h
+```
+
 ## Build
 
 ```bash

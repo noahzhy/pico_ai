@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 add_executable(lpr
   lpr.c
+  ml_model.cpp
 )
 
 target_include_directories(lpr PRIVATE
@@ -21,8 +22,7 @@ pico_add_extra_outputs(lpr)
 
 target_link_libraries(lpr
   pico_stdlib
-  # Uncomment when using Pico W
-  # pico_cyw43_arch_none
+  pico_tflmicro
 )
 
-target_link_libraries(pico_stdlib)
+add_subdirectory("pico-tflmicro" EXCLUDE_FROM_ALL)
