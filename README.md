@@ -9,6 +9,7 @@
     - [Demo](#demo)
     - [Run your own model](#run-your-own-model)
   - [Build](#build)
+  - [Flash](#flash)
 
 ## Introduction
 
@@ -51,11 +52,12 @@ Download and install Brew from [here](https://brew.sh/).
 Then use Shell commands to install the environment:
 
 ```bash
+brew install cmake
+brew install flatbuffers
+brew tap ArmMbed/homebrew-formulae
 brew uninstall --force arm-none-eabi-gcc
 brew uninstall --force arm-none-eabi-binutils
 brew install gcc-arm-embedded
-brew install flatbuffers
-brew install cmake
 ```
 
 ## Start with TF-micro on Pico
@@ -143,5 +145,13 @@ Now you can [Build](#build) your project. Then you can find the `.uf2` file in t
 cd demo
 mkdir build
 cd build
-cmake .. && make -j4
+cmake .. -DPICO_BOARD=pico
+make -j4
 ```
+
+## Flash
+
+For Raspberry Pi Pico
+
+1. Plug the USB Micro cable into your PC, but do NOT plug in the Pico side.
+2. While holding down the white BOOTSEL button, plug in the micro USB cable to the Pico.

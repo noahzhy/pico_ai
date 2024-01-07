@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Arm Limited and Contributors. All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
- * 
+ *
  */
 
 #ifndef _ML_MODEL_H_
@@ -13,28 +13,28 @@
 #include "tensorflow/lite/micro/micro_interpreter.h"
 
 class MLModel {
-    public:
-        MLModel(const unsigned char tflite_model[], int tensor_arena_size);
-        virtual ~MLModel();
+  public:
+    MLModel(const unsigned char tflite_model[], int tensor_arena_size);
+    virtual ~MLModel();
 
-        int init();
-        void* input_data();
-        float predict();
+    int init();
+    void *input_data();
+    int8_t* predict();
 
-        float input_scale() const;
-        int32_t input_zero_point() const;
-    private:
-        const unsigned char* _tflite_model;
-        int _tensor_arena_size;
+    float input_scale() const;
+    int32_t input_zero_point() const;
 
-        uint8_t* _tensor_arena;
-        tflite::MicroErrorReporter _error_reporter;
-        const tflite::Model* _model;
-        tflite::MicroInterpreter* _interpreter;
-        TfLiteTensor* _input_tensor;
-        TfLiteTensor* _output_tensor;
+  private:
+    const unsigned char *_tflite_model;
+    int _tensor_arena_size;
 
-        tflite::AllOpsResolver _opsResolver;
+    const tflite::Model *_model;
+    uint8_t *_tensor_arena;
+    TfLiteTensor *_input_tensor;
+    TfLiteTensor *_output_tensor;
+    tflite::MicroInterpreter *_interpreter;
+    tflite::AllOpsResolver _opsResolver;
+    tflite::MicroErrorReporter _error_reporter;
 };
 
 #endif
