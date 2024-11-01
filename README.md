@@ -10,6 +10,7 @@
     - [Run your own model](#run-your-own-model)
   - [Build](#build)
   - [Flash](#flash)
+  - [References](#references)
 
 ## Introduction
 
@@ -155,3 +156,7 @@ For Raspberry Pi Pico
 
 1. Plug the USB Micro cable into your PC, but do NOT plug in the Pico side.
 2. While holding down the white BOOTSEL button, plug in the micro USB cable to the Pico.
+
+## References
+
+1. [Get started with microcontrollers](https://www.tensorflow.org/lite/microcontrollers/get_started_low_level)
